@@ -1,0 +1,42 @@
+<ion-content>
+<ion-header>
+  
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+    <ion-back-button  defaultHref="home"></ion-back-button>
+  </ion-buttons>
+
+    <ion-title>Informções do Filme</ion-title>
+  </ion-toolbar>
+  <ion-card  *ngIf="detalhes">
+    <h2>{{detalhes.title}}</h2>
+    <p>{{detalhes.opening_crawl}}</p>
+    <p>diretor: {{detalhes.director}}</p>
+    <p>produtor: {{detalhes.producer}}</p>
+  </ion-card>
+
+    <ion-button expand="full" color="dark" (click)="mostralistaPessoa()">
+      Pessoas
+    </ion-button>
+
+    <ion-button expand="full"  color="dark" (click)="mostralistaPlanets()">
+      Planetas
+    </ion-button>
+  
+    <ion-button expand="full" color="dark" (click)="mostraVeiculos()">
+      Veiculos
+    </ion-button>
+  
+    <ion-button expand="full" color="dark" (click)="mostraNave()">
+      Naves
+    </ion-button>
+  
+    <ion-button expand="full" color="dark"  (click)="mostraEspecie()">
+      Especies
+    </ion-button>
+  
+
+
+</ion-header>
+</ion-content>

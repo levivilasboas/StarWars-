@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>vehicles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="full" color="dark" *ngFor="let veiculo of veiculos">
+    <h2>{{veiculo.name}}</h2>
+  </ion-button>
+</ion-content>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="details"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
