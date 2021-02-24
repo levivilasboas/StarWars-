@@ -1,42 +1,48 @@
 <ion-content>
-<ion-header>
-  
-  <ion-toolbar>
+  <ion-header>
 
-    <ion-buttons slot="start">
-    <ion-back-button  defaultHref="home"></ion-back-button>
-  </ion-buttons>
+    <ion-toolbar color="dark">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button color="dark" (click)="voltar()">
+              <ion-icon name="arrow-undo-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-title>Informaçoes do Filme</ion-title>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
 
-    <ion-title>Informções do Filme</ion-title>
-  </ion-toolbar>
-  <ion-card  *ngIf="detalhes">
-    <h2>{{detalhes.title}}</h2>
-    <p>{{detalhes.opening_crawl}}</p>
-    <p>diretor: {{detalhes.director}}</p>
-    <p>produtor: {{detalhes.producer}}</p>
-  </ion-card>
+    <ion-card *ngIf="detalhes">
+      <h2>{{detalhes.title}}</h2>
+      <p>{{detalhes.opening_crawl}}</p>
+      <p>diretor: {{detalhes.director}}</p>
+      <p>produtor: {{detalhes.producer}}</p>
+    </ion-card>
 
     <ion-button expand="full" color="dark" (click)="mostralistaPessoa()">
       Pessoas
     </ion-button>
 
-    <ion-button expand="full"  color="dark" (click)="mostralistaPlanets()">
+    <ion-button expand="full" color="dark" (click)="mostralistaPlanets()">
       Planetas
     </ion-button>
-  
+
     <ion-button expand="full" color="dark" (click)="mostraVeiculos()">
       Veiculos
     </ion-button>
-  
+
     <ion-button expand="full" color="dark" (click)="mostraNave()">
       Naves
     </ion-button>
-  
-    <ion-button expand="full" color="dark"  (click)="mostraEspecie()">
+
+    <ion-button expand="full" color="dark" (click)="mostraEspecie()">
       Especies
     </ion-button>
-  
 
 
-</ion-header>
+
+  </ion-header>
 </ion-content>

@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ApiStarWarsService } from '../service/api-star-wars.service';
 import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-species',
@@ -13,12 +15,13 @@ export class SpeciesPage implements OnInit {
   apiEspecie: any[] = [];
   especies: any[] = [];
 
-  constructor(private api: ApiStarWarsService, public http: HttpClient, private storage: Storage) { }
+  constructor(private loadingController: LoadingController ,private api: ApiStarWarsService, public http: HttpClient, private storage: Storage , private router: Router) { }
 
   ngOnInit() {
   }
 
   async getEspecie() {
+    this.presentLoading();
     //montar header
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
@@ -43,9 +46,22 @@ export class SpeciesPage implements OnInit {
 
     })
   }
+  voltar(){
+    this.router.navigateByUrl('/films/details');
+  }
 
   ionViewWillEnter() {
     this.getEspecie();
   }
-
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'May the Force be with you...',
+      duration: 500
+    });
+    await loading.present();
+  
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
 }

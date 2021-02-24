@@ -1,13 +1,21 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title>Filmes</ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col>
+          <ion-title>Filmes</ion-title>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" >
-    <ion-card *ngFor ="let film of films"> 
-           <ion-button expand="full" color="dark" (click)="Teste(film.episode_id)"><ion-label>{{film.title}} {{film.episode_id}}</ion-label></ion-button> 
-    </ion-card>
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let film of films">
+    <ion-button expand="full" color="dark" (click)="Teste(film.episode_id)">
+      <ion-label>{{film.title}}</ion-label>
+    </ion-button>
+  </ion-card>
 </ion-content>
-    
-  

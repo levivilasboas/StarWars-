@@ -1,6 +1,17 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>species</ion-title>
+  <ion-toolbar color="dark">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button color="dark" (click)="voltar()">
+            <ion-icon name="arrow-undo-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      
+    <ion-title>Especies</ion-title>
+    <ion-col></ion-col>
+  </ion-row>
+  </ion-grid>
   </ion-toolbar>
 </ion-header>
 
@@ -10,10 +21,3 @@
   </ion-button>
 </ion-content>
 
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="details"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>

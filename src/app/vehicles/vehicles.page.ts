@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ApiStarWarsService } from '../service/api-star-wars.service';
 import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-vehicles',
@@ -14,13 +16,14 @@ export class VehiclesPage implements OnInit {
   idfilm: any;
   apiveiculos: any[] = [];
   veiculos: any[] = [];
+  
 
-  constructor(private api: ApiStarWarsService ,public http: HttpClient, private storage: Storage) { }
+  constructor(private loadingController: LoadingController ,private api: ApiStarWarsService ,public http: HttpClient, private storage: Storage , private router: Router) { }
 
-  ngOnInit() {
-  }
+  
 
   async getVeiculos(){
+    this.presentLoading();
     //montar header
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
@@ -45,9 +48,25 @@ export class VehiclesPage implements OnInit {
      
   })
 }
-ionViewWillEnter() {
+voltar(){
+  this.router.navigateByUrl('/films/details');
+}
+// ionViewWillEnter() {
+//   this.getVeiculos();
+// }
+async ngOnInit() {
   this.getVeiculos();
 }
+async presentLoading() {
+  const loading = await this.loadingController.create({
+    cssClass: 'my-custom-class',
+    message: 'May the Force be with you...',
+    duration: 50
+  });
+  await loading.present();
 
+  const { role, data } = await loading.onDidDismiss();
+  console.log('Loading dismissed!');
+}
 
 }

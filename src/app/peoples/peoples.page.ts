@@ -3,7 +3,7 @@ import { ApiStarWarsService } from '../service/api-star-wars.service';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-peoples',
@@ -12,7 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class PeoplesPage implements OnInit {
 
-  constructor(private api: ApiStarWarsService, private router: Router, public http: HttpClient,private storage: Storage) { }
+  constructor(public loadingController: LoadingController ,private api: ApiStarWarsService, private router: Router, public http: HttpClient,private storage: Storage) { }
   pessoas: any[] = [];
   idfilm: any;
   Cfilmes: any[] = [];
@@ -23,6 +23,8 @@ export class PeoplesPage implements OnInit {
 
   }
   async getCfilmes() {
+    this.presentLoading();
+    
     //montar header
     let header = new HttpHeaders();
     header = header.append('Content-Type', 'application/json');
@@ -48,11 +50,28 @@ export class PeoplesPage implements OnInit {
       console.log("pessoas",this.pessoas);
 
     })
+    
   }
-
+  voltar(){
+    this.router.navigateByUrl('/films/details');
+  }
+ 
 
   ionViewWillEnter() {
     this.getCfilmes();
 
   }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'May the Force be with you...',
+      duration: 1000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
+
 }

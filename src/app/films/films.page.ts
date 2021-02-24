@@ -3,6 +3,7 @@ import { ApiStarWarsService } from '../service/api-star-wars.service';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import * as _ from 'lodash';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class FilmsPage implements OnInit {
   films: any[] = [];
  
 
-  constructor(private router: Router, private api: ApiStarWarsService, private storage: Storage) { }
+  constructor(public loadingController: LoadingController,private router: Router, private api: ApiStarWarsService, private storage: Storage) { }
 
   ngOnInit() {
     console.log(this.films);
@@ -24,6 +25,7 @@ export class FilmsPage implements OnInit {
   }
 
   getFilm() {
+    this.presentLoading();
     this.api.getApi().subscribe((res: any) => {
       this.films = res.results;
       // this.films=_.orderBy(this.films,'episode_id','asc');
@@ -50,6 +52,17 @@ export class FilmsPage implements OnInit {
     this.storage.set('id', episode_id);
     console.log('filmsId', episode_id);
     this.router.navigateByUrl('films/details');
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 500
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
 
